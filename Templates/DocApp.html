@@ -1,0 +1,63 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block body %}
+
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="d-flex flex-column">
+                    <img class="img-fluid rounded w-75 align-self-end" src="{% static 'img/about-1.jpg' %}" alt="">
+                    <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="{% static 'img/about-2.jpg' %}" alt="" style="margin-top: -25%;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <p class="d-inline-block border rounded-pill py-1 px-4">Appointments</p>
+                {% for item in data %}
+                <form style="border: 3px solid rgb(7, 169, 244);border-radius: 20px;padding: 20px;margin:5px;" method="GET" action="./delete">
+                    <style> label{
+                        color: rgb(7, 169, 244);
+                        font-weight: bold;
+                        font-size: 16px;}</style>
+                        <input type="hidden" name="appointment_id" value="{{item.id}}">
+                   <label for="name">Patient Name: </label>
+                   <input type="text" name="name" id="name" value="{{item.name}}" readonly>
+                   <label for="email">Email: </label>
+                   <input type="email" name="email" id=email value="{{item.email}}" readonly>
+                   <label for="phone">Mobile_number: </label>
+                   <input type="text" name="phone" id="phone" value="{{item.phone}}" readonly>
+                   <label for="date">Appointment Date: </label>
+                   <input type="text" name="date" id="date" value="{{item.date}}" readonly>
+                   <label for="time">Appointment Time: </label>
+                   <input type="text" name="time" id="time" value="{{item.time}}" readonly>
+                   <label for="Reason">Reason: </label>
+                   <input type="text" name="reason" id="reason" value="{{item.reason}}" readonly>
+
+                   <div class="delete-form">
+                    {% csrf_token %}
+                    <style>
+                        button {
+                            background-color:rgb(7, 169, 244);
+                            color: white;
+                            padding: 8px 30px;
+                            border-radius: 5px;
+                            border: none;
+                            cursor: pointer;
+                        }
+                        
+                        button:hover {
+                            background-color: rgb(7, 169, 244);
+                        }
+                    </style>
+                    <button type="submit" name="delete">Delete</button>
+                   </div>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+
+{% endblock %}
